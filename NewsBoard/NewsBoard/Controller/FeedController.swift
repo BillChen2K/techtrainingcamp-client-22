@@ -13,7 +13,7 @@ class FeedController: ObservableObject {
     @Published var feedList : [PostModel] = []
     
     init() {
-        self.loadFeedList()
+        let _ = self.loadFeedList()
     }
     
     func loadFeedList() -> [PostModel] {

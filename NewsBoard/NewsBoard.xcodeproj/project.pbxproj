@@ -27,6 +27,7 @@
 		EE9BD16A2569899D0075DBE5 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EE9BD1692569899D0075DBE5 /* SwiftyJSON */; };
 		EE9BD170256989C30075DBE5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EE9BD16F256989C30075DBE5 /* Alamofire */; };
 		EE9BD18225698AD00075DBE5 /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = EE9BD18125698AD00075DBE5 /* metadata.json */; };
+		EEF3C29A256A15A6002A1053 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF3C299256A15A6002A1053 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		EE9BD14B256989190075DBE5 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		EE9BD14C256989190075DBE5 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		EE9BD18125698AD00075DBE5 /* metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata.json; sourceTree = "<group>"; };
+		EEF3C299256A15A6002A1053 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				EE9A1979256A0CE000F6D061 /* ColorExtension.swift */,
+				EEF3C299256A15A6002A1053 /* Config.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = EE9BD100256986360075DBE5;
 			packageReferences = (
@@ -359,6 +363,7 @@
 				EE9BD147256989130075DBE5 /* LogInView.swift in Sources */,
 				EE9BD146256989130075DBE5 /* FeedView.swift in Sources */,
 				EE898EC72569923A00B4CF4B /* FeedListItem.swift in Sources */,
+				EEF3C29A256A15A6002A1053 /* Config.swift in Sources */,
 				EE9A1975256A03EA00F6D061 /* Model.swift in Sources */,
 				EE9A1970256A03DD00F6D061 /* UserController.swift in Sources */,
 				EE9BD10F256986360075DBE5 /* ContentView.swift in Sources */,

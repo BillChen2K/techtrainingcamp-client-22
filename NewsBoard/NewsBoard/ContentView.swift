@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isLoading = true
     
     var body: some View {
-        LoadingView(isLoading: $isLoading) {
-            FeedView(isLoading: $isLoading)
-        }
-
+        FeedView()
     }
 }
 
