@@ -13,7 +13,12 @@ struct LoadingView<Content>: View where Content: View {
     
     var body: some View {
         ZStack(alignment: .center) {
-            
+            VStack {
+                HStack{
+                    Spacer()
+                }
+                Spacer()
+            }
             self.content()
                 .disabled(self.isLoading)
                 .blur(radius: self.isLoading ? 3 : 0)

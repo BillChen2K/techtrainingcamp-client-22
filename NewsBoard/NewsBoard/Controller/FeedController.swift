@@ -7,13 +7,19 @@
 
 import Foundation
 import SwiftyJSON
+import SwiftUI
 
 class FeedController: ObservableObject {
     
     @Published var feedList : [PostModel] = []
+    @Published var isLoading = false
     
     init() {
+        //        let _ = self.loadFeedList()
+        
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         let _ = self.loadFeedList()
+        //        }
     }
     
     func loadFeedList() -> [PostModel] {
@@ -42,7 +48,9 @@ class FeedController: ObservableObject {
                 default:
                     onePost.cover = []
                 }
-                feedList.append(onePost)
+                withAnimation {
+                    feedList.append(onePost)
+                }
             }
             self.feedList = feedList
             return feedList

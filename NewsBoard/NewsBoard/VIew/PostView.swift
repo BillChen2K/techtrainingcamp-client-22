@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PostView: View {
+    @State var isLoading = true
+    
     var post: PostModel
     var body: some View {
         ScrollView {
@@ -16,10 +18,20 @@ struct PostView: View {
                     Spacer()
                 }
                 Text(post.title!).font(.title2).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                
                 HStack {
                     Text(post.author!).font(.caption).foregroundColor(.gray)
                     Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
                 }.padding(.top, 6)
+                
+                if isLoading {
+                    HStack {
+                        Spacer()
+                        LoadingIndicator(strokeColor: .black, size: .Inline).padding()
+                        Spacer()
+                    }.padding()
+                }
+
                 
             }.padding()
            

@@ -9,6 +9,7 @@ import Foundation
 
 class UserModel: Identifiable {
     var username: String?
+    var token: String?
     
     
     internal init(username: String? = "") {
