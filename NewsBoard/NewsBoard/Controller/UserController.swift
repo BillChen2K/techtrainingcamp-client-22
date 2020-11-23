@@ -22,7 +22,7 @@ class UserController: ObservableObject{
     @Published var currentUser: UserModel?
     @Published var loginStatus: LoginStatus = .loggedOut
     
-    func performLogIn(username: String, password: String, completion: @escaping (_ result: Bool) -> Void){
+    func performLogIn(username: String, password: String, completion: @escaping (_ result: ResponseStatus) -> Void){
         
         let parameters: [String: String] = [
             "username": username,
@@ -36,17 +36,22 @@ class UserController: ObservableObject{
                 self.currentUser = UserModel(username: username)
                 self.currentUser!.token = json["token"].string!
                 self.loginStatus = .loggedIn
-                completion(true)
+                completion(.success)
             case .failure(let error):
                 print(error)
-                completion(false)
+                completion(.networkError)
             }
         }
     }
     
-    func performlogOut() {
-        self.loginStatus = .loggedOut
+    func performlogOut(isOutdated: Bool = false) {
         self.currentUser = nil
+        if isOutdated {
+            self.loginStatus = .outdated
+        }
+        else {
+            self.loginStatus = .loggedOut
+        }
     }
 }
 
@@ -54,4 +59,5 @@ enum LoginStatus {
     case loggedOut
     case loggedIn
     case cached
+    case outdated
 }

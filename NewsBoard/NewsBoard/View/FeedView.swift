@@ -12,14 +12,14 @@ struct FeedView: View {
     
     @ObservedObject var feedController = FeedController()
     @ObservedObject var userController = UserController()
-    
-    
+
     func getPostDestination(_ post: PostModel) -> AnyView {
-        return userController.loginStatus == LoginStatus.loggedOut ? AnyView(LogInView(userController: userController)) : AnyView(PostView(post: post))
+        return userController.loginStatus == LoginStatus.loggedOut ? AnyView(LogInView(userController: userController)) : AnyView(PostView(isLogInPushed: false, userController: userController, post: post))
     }
     
     
     var body: some View {
+        
         NavigationView {
             ScrollView() {
                 HStack {
@@ -46,7 +46,7 @@ struct FeedView: View {
                                         destination: LogInView(userController: userController),
                                         label: {
                                             HStack {
-                                                Text(userController.currentUser?.username ?? "未登录").font(.callout)
+                                                Text(userController.loginStatus == LoginStatus.loggedIn || userController.loginStatus == LoginStatus.cached ? userController.currentUser!.username! : "未登录").font(.callout)
                                                 Image(systemName: "person.fill").padding(6)
                                             }
                                         })

@@ -16,8 +16,8 @@ class FeedController: ObservableObject {
     
     init() {
         //        let _ = self.loadFeedList()
-        
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        
         let _ = self.loadFeedList()
         //        }
     }
@@ -54,7 +54,6 @@ class FeedController: ObservableObject {
             }
             self.feedList = feedList
             return feedList
-            
         }
         catch {
             fatalError("Fail to parse json file.")
