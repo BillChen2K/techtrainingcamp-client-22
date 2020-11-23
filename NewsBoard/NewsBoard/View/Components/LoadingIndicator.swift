@@ -35,7 +35,7 @@ struct LoadingIndicator: View {
     var body: some View {
         Circle()
             .trim(from: 0, to: 0.7)
-            .stroke(strokeColor, lineWidth: max(5 * self.sizeMultiplier, 4))
+            .stroke(/* strokeColor */ Color.primary, lineWidth: max(5 * self.sizeMultiplier, 4))
             .frame(width: 50 * CGFloat(self.sizeMultiplier), height: 50 * CGFloat(self.sizeMultiplier))
             .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
             .animation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: false))

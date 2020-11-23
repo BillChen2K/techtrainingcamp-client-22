@@ -16,7 +16,7 @@ struct FeedListItem: View {
             case 1:
                 HStack {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(post.title!).frame(height: 50, alignment: .top).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.black)
+                        Text(post.title!).frame(height: 50, alignment: .top).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.primary)
                         HStack {
                             Text(post.author!).font(.caption).foregroundColor(.gray)
                             Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
@@ -30,7 +30,7 @@ struct FeedListItem: View {
 
                     Image(post.cover[0]).resizable().aspectRatio(contentMode: .fit).frame(width: 120, height: 80).cornerRadius(6).clipped()
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(post.title!).frame(height: 50, alignment: .top).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.black)
+                        Text(post.title!).frame(height: 50, alignment: .top).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.primary)
                         HStack {
                             Text(post.author!).font(.caption).foregroundColor(.gray)
                             Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
@@ -41,7 +41,7 @@ struct FeedListItem: View {
             case 3:
                 VStack(alignment: .leading, spacing: 0) {
                     Image(post.cover[0]).resizable().aspectRatio(contentMode: .fit).frame(height: 250) .cornerRadius(6).clipped().padding(.bottom, 12)
-                    Text(post.title!).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.black)
+                    Text(post.title!).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.primary)
                     HStack {
                         Text(post.author!).font(.caption).foregroundColor(.gray)
                         Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
@@ -57,7 +57,7 @@ struct FeedListItem: View {
                         }
                     }
                    
-                    Text(post.title!).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.black)
+                    Text(post.title!).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.primary) 
                     HStack {
                         Text(post.author!).font(.caption).foregroundColor(.gray)
                         Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
@@ -65,7 +65,7 @@ struct FeedListItem: View {
                 }.padding(.horizontal, 6)
             default:
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(post.title!).frame(height: 20).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.black)
+                    Text(post.title!).frame(height: 20).font(.system(size: 18, weight: .semibold, design: .default)).foregroundColor(.primary)
                     HStack {
                         Text(post.author!).font(.caption).foregroundColor(.gray)
                         Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
