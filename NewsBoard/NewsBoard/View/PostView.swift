@@ -10,7 +10,7 @@ import SwiftUI
 struct PostView: View {
     @State var isLoading = true
     @State var isLogInPushed: Bool
-    
+    @State var animationHandle = true
     @ObservedObject var postController = PostController()
     @ObservedObject var userController: UserController
     
@@ -32,29 +32,45 @@ struct PostView: View {
         //            }
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(post.title!).font(.title).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Text(post.title!).font(.title).fontWeight(.bold)
+                    .offset(x: animationHandle ? 50 : 0, y: 0)
+                    .opacity(animationHandle ? 0 : 1)
+                    .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.25))
                 HStack {
                     Text(post.author!).font(.caption).foregroundColor(.gray)
+                        .offset(x: animationHandle ? 50 : 0, y: 0)
+                        .opacity(animationHandle ? 0 : 1)
+                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.3))
                     Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
+                        .offset(x: animationHandle ? 50 : 0, y: 0)
+                        .opacity(animationHandle ? 0 : 1)
+                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.35))
                 }.padding(.top, 6)
+                
             }.padding(.horizontal).padding(.top)
-            if isLoading {
-                HStack {
-                    Spacer()
-                    LoadingIndicator(strokeColor: .primary, size: .Inline).padding()
-                    Spacer()
-                }.padding()
-                .transition(.opacity)
-                .animation(.easeInOut)
+            ZStack {
+                if isLoading {
+                    HStack {
+                        Spacer()
+                        LoadingIndicator(strokeColor: .primary, size: .Inline).padding()
+                        Spacer()
+                    }.padding()
+                    .transition(.opacity)
+                    .animation(.easeInOut)
+                }
+                else{
+                    MarkdownDisplayer(content: postController.postContent ?? "").padding(.top)
+                        .transition(.opacity)
+                        .animation(.easeInOut)
+    //                HStack {
+    //                    Spacer()
+    //                    Text("•").font(.title3).foregroundColor(.gray).padding().padding()
+    //                    Spacer()
+    //                }
+                }
+
             }
-            else{
-                MarkdownDisplayer(content: postController.postContent ?? "").padding(.top)
-//                HStack {
-//                    Spacer()
-//                    Text("•").font(.title3).foregroundColor(.gray).padding().padding()
-//                    Spacer()
-//                }
-            }
+            
             NavigationLink(
                 destination: LogInView(userController: userController), isActive: $isLogInPushed) {
             }
@@ -62,6 +78,7 @@ struct PostView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear() {
+            self.animationHandle = false
             if [LoginStatus.loggedIn, LoginStatus.cached].contains(userController.loginStatus) {
                 self.postController.getPostContent(token: userController.currentUser!.token!, id: post.id!) { result in
                     if result == .success {
@@ -71,14 +88,14 @@ struct PostView: View {
                     }
                     else if result == .tokenInvalid {
                         self.userController.performlogOut(isOutdated: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.isLogInPushed = true
                         }
                     }
                 }
             }
             else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.presentationMode.wrappedValue.dismiss()
                 }
                 self.isLogInPushed = true

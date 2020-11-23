@@ -34,7 +34,7 @@ class PostController: ObservableObject {
                 let json = JSON(value)
                 if json["message"].string! == "success" {
                     self.postContent = json["data"].string!
-                    print(self.postContent)
+                    print(self.postContent!)
                     completion(.success)
                 }
                 else if json["code"].string! == "credentials_bad_format"{
@@ -45,6 +45,9 @@ class PostController: ObservableObject {
                 }
             case .failure(let error):
                 print(error)
+                if error.responseCode == 401 {
+                    completion(.tokenInvalid)
+                }
                 completion(.networkError)
             }
         }

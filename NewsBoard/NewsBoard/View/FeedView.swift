@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeedView: View {
-    @State var isLoading: Bool = false
+    @State var animationHandle : Bool = true
     
     @ObservedObject var feedController = FeedController()
     @ObservedObject var userController = UserController()
@@ -25,19 +25,28 @@ struct FeedView: View {
                 HStack {
                     Spacer()
                 }
-                ForEach(feedController.feedList) {onePost in
+                ForEach(0..<feedController.feedList.count) {i in
                     NavigationLink(
-                        destination: getPostDestination(onePost),
+                        destination: getPostDestination(feedController.feedList[i]),
                         label: {
-                            FeedListItem(post: onePost)
-                        }).transition(.opacity)
+                            FeedListItem(post: feedController.feedList[i])
+                                .opacity(animationHandle ? 0 : 1)
+                                .offset(x: 0, y: animationHandle ? 50 : 0)
+                                .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.1 * Double(i)))
+                        })
                 }
                 Image("ByteDanceLogo").resizable().aspectRatio(contentMode: .fit).frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/).padding()
+                    .onTapGesture {
+                        self.animationHandle.toggle()
+                    }
                 Text("")
             }
             .onAppear() {
                 //                let _ = feedController.loadFeedList()
-                self.isLoading = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    self.animationHandle = false
+
+                }
             }
             .navigationTitle("公告板")
             .navigationBarTitleDisplayMode(.inline)

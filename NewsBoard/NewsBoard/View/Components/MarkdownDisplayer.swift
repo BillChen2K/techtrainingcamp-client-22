@@ -27,6 +27,7 @@ struct MarkdownDisplayer: View {
     }
     @State var htmlString = ""
     @State var viewHeight: CGFloat = 500
+    @State var isLoading = true
 
     fileprivate func iniJsContext() {
         let jsPath = Bundle.main.path(forResource: "showdown", ofType: "js")
@@ -49,9 +50,13 @@ struct MarkdownDisplayer: View {
     
     var body: some View {
         VStack {
-            HtmlView(htmlString: $htmlString)
+            HtmlView(htmlString: $htmlString).opacity(isLoading ? 0 : 1).transition(.opacity).animation(.easeInOut(duration: 0.25))
+                
         }.onAppear(){
             self.htmlString = markdownToHTML(markString: content)
+            DispatchQueue.main.asyncAfter(deadline: .now() +  0.2) {
+                self.isLoading = false
+            }
         }
     }
 }
