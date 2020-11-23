@@ -11,18 +11,41 @@ import SwiftyJSON
 
 class UserController: ObservableObject{
     
-    //    required init(from decoder: Decoder) throws {
-    //
-    //    }
-    //
-    //    func encode(to encoder: Encoder) throws {
-    //
-    //    }
-    
     @Published var currentUser: UserModel?
-    @Published var loginStatus: LoginStatus = .loggedOut
+    @Published var loginStatus: LoginStatus = .loggedOut {
+        didSet {
+            print("Login status switched: \(self.loginStatus)")
+        }
+    }
     
-    func performLogIn(username: String, password: String, completion: @escaping (_ result: ResponseStatus) -> Void){
+    /// Try to load username from credentials.
+    init() {
+        // Load saved user
+        if let data = UserDefaults.standard.data(forKey: "SavedUser") {
+            do {
+                let decoder = JSONDecoder()
+                self.loginStatus = .cached
+                currentUser = try decoder.decode(UserModel.self, from: data)
+            } catch {
+                print("Unable to decode saved user. (\(error))")
+            }
+        }
+    }
+    
+    /// Save username and credential info to UserDefaults.
+    func saveUser() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(currentUser)
+            UserDefaults.standard.setValue(data, forKey: "SavedUser")
+        }
+        catch {
+            print("Unable to save user. (\(error))")
+
+        }
+    }
+   
+    func performLogIn(username: String, password: String, remember: Bool = true, completion: @escaping (_ result: ResponseStatus) -> Void){
         
         let parameters: [String: String] = [
             "username": username,
@@ -35,7 +58,11 @@ class UserController: ObservableObject{
                 let json = JSON(value)
                 self.currentUser = UserModel(username: username)
                 self.currentUser!.token = json["token"].string!
+                self.currentUser!.logInTime = Date()
                 self.loginStatus = .loggedIn
+                if remember {
+                    self.saveUser()
+                }
                 completion(.success)
             case .failure(let error):
                 print(error)
@@ -46,6 +73,7 @@ class UserController: ObservableObject{
     
     func performlogOut(isOutdated: Bool = false) {
         self.currentUser = nil
+        UserDefaults.standard.removeObject(forKey: "SavedUser")
         if isOutdated {
             self.loginStatus = .outdated
         }

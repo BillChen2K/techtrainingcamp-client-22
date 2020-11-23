@@ -19,10 +19,12 @@
 		EE264140256BB9CC00B96B5D /* tancheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE26413A256BB9CC00B96B5D /* tancheng.jpg */; };
 		EE264141256BB9CC00B96B5D /* tb09_2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EE26413B256BB9CC00B96B5D /* tb09_2.jpeg */; };
 		EE264146256BB9D100B96B5D /* event_02.png in Resources */ = {isa = PBXBuildFile; fileRef = EE264145256BB9D000B96B5D /* event_02.png */; };
+		EE26414E256BCD6000B96B5D /* MyDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26414D256BCD6000B96B5D /* MyDateFormatter.swift */; };
+		EE264153256BCF7200B96B5D /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE264152256BCF7200B96B5D /* CheckBoxStyle.swift */; };
 		EE898EC72569923A00B4CF4B /* FeedListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE898EC62569923A00B4CF4B /* FeedListItem.swift */; };
 		EE9A196B256A02C500F6D061 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A196A256A02C500F6D061 /* PostView.swift */; };
 		EE9A1970256A03DD00F6D061 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A196F256A03DD00F6D061 /* UserController.swift */; };
-		EE9A1975256A03EA00F6D061 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A1974256A03EA00F6D061 /* Model.swift */; };
+		EE9A1975256A03EA00F6D061 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A1974256A03EA00F6D061 /* UserModel.swift */; };
 		EE9A197A256A0CE000F6D061 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A1979256A0CE000F6D061 /* ColorExtension.swift */; };
 		EE9BD10D256986360075DBE5 /* NewsBoardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BD10C256986360075DBE5 /* NewsBoardApp.swift */; };
 		EE9BD10F256986360075DBE5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BD10E256986360075DBE5 /* ContentView.swift */; };
@@ -72,10 +74,12 @@
 		EE26413A256BB9CC00B96B5D /* tancheng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tancheng.jpg; path = ../../../../footage/tancheng.jpg; sourceTree = "<group>"; };
 		EE26413B256BB9CC00B96B5D /* tb09_2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tb09_2.jpeg; path = ../../../../footage/tb09_2.jpeg; sourceTree = "<group>"; };
 		EE264145256BB9D000B96B5D /* event_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_02.png; path = ../../../../footage/event_02.png; sourceTree = "<group>"; };
+		EE26414D256BCD6000B96B5D /* MyDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateFormatter.swift; sourceTree = "<group>"; };
+		EE264152256BCF7200B96B5D /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 		EE898EC62569923A00B4CF4B /* FeedListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListItem.swift; sourceTree = "<group>"; };
 		EE9A196A256A02C500F6D061 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		EE9A196F256A03DD00F6D061 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		EE9A1974256A03EA00F6D061 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EE9A1974256A03EA00F6D061 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EE9A1979256A0CE000F6D061 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		EE9BD109256986360075DBE5 /* NewsBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9BD10C256986360075DBE5 /* NewsBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBoardApp.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				EE264122256B991700B96B5D /* Markdown */,
 				EE9A1979256A0CE000F6D061 /* ColorExtension.swift */,
 				EEF3C299256A15A6002A1053 /* Config.swift */,
+				EE26414D256BCD6000B96B5D /* MyDateFormatter.swift */,
+				EE264152256BCF7200B96B5D /* CheckBoxStyle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -259,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				EE9BD13F2569890D0075DBE5 /* PostModel.swift */,
-				EE9A1974256A03EA00F6D061 /* Model.swift */,
+				EE9A1974256A03EA00F6D061 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -427,10 +433,12 @@
 				EE9BD146256989130075DBE5 /* FeedView.swift in Sources */,
 				EE898EC72569923A00B4CF4B /* FeedListItem.swift in Sources */,
 				EEF3C29A256A15A6002A1053 /* Config.swift in Sources */,
-				EE9A1975256A03EA00F6D061 /* Model.swift in Sources */,
+				EE9A1975256A03EA00F6D061 /* UserModel.swift in Sources */,
 				EE9A1970256A03DD00F6D061 /* UserController.swift in Sources */,
 				EE9BD10F256986360075DBE5 /* ContentView.swift in Sources */,
+				EE264153256BCF7200B96B5D /* CheckBoxStyle.swift in Sources */,
 				EE9BD14D256989190075DBE5 /* LoadingIndicator.swift in Sources */,
+				EE26414E256BCD6000B96B5D /* MyDateFormatter.swift in Sources */,
 				EE26411E256B7B7E00B96B5D /* PostController.swift in Sources */,
 				EE9BD1402569890D0075DBE5 /* PostModel.swift in Sources */,
 				EE9BD14E256989190075DBE5 /* LoadingView.swift in Sources */,

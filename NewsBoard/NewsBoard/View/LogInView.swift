@@ -11,6 +11,7 @@ struct LogInView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State var isLoading: Bool = false
+    @State var ifRemember: Bool = true
     
     @ObservedObject var userController: UserController
     
@@ -32,6 +33,7 @@ struct LogInView: View {
             VStack {
                 if (self.userController.loginStatus == .loggedIn || self.userController.loginStatus == .cached) {
                     Text("Welcome, \(userController.currentUser!.username!).").font(.title3).fontWeight(.bold).padding()
+                    Text("You've logged in since \(MyDateFormatter.dateToString(from: userController.currentUser!.logInTime!)).").font(.callout)
                     Button(action: {
                         userController.performlogOut()
                         presentationMode.wrappedValue.dismiss()
@@ -62,7 +64,7 @@ struct LogInView: View {
                     }.padding(12)
                     Button(action: {
                         isLoading = true
-                        userController.performLogIn(username: username, password: password) { result in
+                        userController.performLogIn(username: username, password: password, remember: ifRemember) { result in
                             isLoading = false
                             if result == .success {
                                 presentationMode.wrappedValue.dismiss()
@@ -78,11 +80,15 @@ struct LogInView: View {
                             Text("Log In").font(.callout).foregroundColor(.white)
                         }
                     }.padding()
+                    Toggle(isOn: $ifRemember) {
+                        Text("Remember").font(.callout)
+                    }.frame(width: 150)
+                    .toggleStyle(CheckboxStyle())
                 }
             }.padding()
             
         }
-        .navigationTitle("Log In")
+        .navigationTitle([LoginStatus.cached, LoginStatus.loggedIn].contains(userController.loginStatus) ? "User Center" : "Log In")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

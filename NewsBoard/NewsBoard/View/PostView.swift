@@ -37,7 +37,7 @@ struct PostView: View {
                     Text(post.author!).font(.caption).foregroundColor(.gray)
                     Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
                 }.padding(.top, 6)
-            }.padding(.horizontal)
+            }.padding(.horizontal).padding(.top)
             if isLoading {
                 HStack {
                     Spacer()
@@ -60,6 +60,7 @@ struct PostView: View {
             }
             Spacer()
         }
+        .edgesIgnoringSafeArea(.bottom)
         .onAppear() {
             if [LoginStatus.loggedIn, LoginStatus.cached].contains(userController.loginStatus) {
                 self.postController.getPostContent(token: userController.currentUser!.token!, id: post.id!) { result in
