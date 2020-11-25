@@ -37,7 +37,9 @@ struct MarkdownDisplayer: View {
         jsContext.evaluateScript(jsContent)
         // 定义JS函数
         jsContext.evaluateScript("""
-            function convert(md) {return (new showdown.Converter({'splitAdjacentBlockquotes': true})).makeHtml(md);}
+            function convert(md) {
+            return (new showdown.Converter({'splitAdjacentBlockquotes': true})).makeHtml(md);
+            }
             """)
     }
 
@@ -53,7 +55,7 @@ struct MarkdownDisplayer: View {
             </head>
             <body>
             \(result!.toString()!)
-            </body
+            </body>
             </html>
 
             """

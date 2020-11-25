@@ -13,14 +13,10 @@ class PostController: ObservableObject {
     
     @Published var postContent: String?
     
-    func localPictureTransformer(raw: String) -> String {
-        let cssPath = Bundle.main.path(forResource: "markdown", ofType: "css")
-        return "hi"
-    }
-    
     /// Handle post with picture and titles in the same line.
     func postPostProcessor(in post: String) -> String {
         let processedPost = post.replacingOccurrences(of: "## ", with: "\n## ").replacingOccurrences(of: "![]", with: "\n![]")
+            .replacingOccurrences(of: "\n    ", with: "\n")
 //        print(processedPost)
         return processedPost
     }

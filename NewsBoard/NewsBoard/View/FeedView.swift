@@ -40,6 +40,9 @@ struct FeedView: View {
                         self.animationHandle.toggle()
                     }
                 Text("")
+                #if targetEnvironment(macCatalyst)
+                Text("You are running NewsBoard with MacCatalyst.").font(.caption).foregroundColor(.gray)
+                #endif
             }
             .onAppear() {
                 //                let _ = feedController.loadFeedList()
