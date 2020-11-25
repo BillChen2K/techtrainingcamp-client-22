@@ -52,7 +52,7 @@ struct FeedListItem: View {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(post.cover, id: \.self) {oneCover in
-                                Image(oneCover).resizable().aspectRatio(contentMode: .fit).frame(height: 70) .cornerRadius(6).clipped().padding(.bottom, 12).padding(.trailing, 12)
+                                Image(oneCover).resizable().aspectRatio(contentMode: .fit).frame(height: 100) .cornerRadius(6).clipped().padding(.bottom, 12).padding(.trailing, 12)
                             }
                         }
                     }

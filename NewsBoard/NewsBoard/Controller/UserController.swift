@@ -20,6 +20,12 @@ class UserController: ObservableObject{
     
     /// Try to load username from credentials.
     init() {
+        
+        print("User Defaults:")
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(key) = \(value) \n")
+        }
+        
         // Load saved user
         if let data = UserDefaults.standard.data(forKey: "SavedUser") {
             do {
@@ -53,6 +59,7 @@ class UserController: ObservableObject{
         ]
         
         AF.request(Config.API + "/login", method: .post, parameters: parameters).validate().responseJSON { response in
+            print(response)
             switch response.result {
             case .success(let value):
                 let json = JSON(value)

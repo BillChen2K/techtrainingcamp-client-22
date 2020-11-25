@@ -18,6 +18,13 @@ class PostController: ObservableObject {
         return "hi"
     }
     
+    /// Handle post with picture and titles in the same line.
+    func postPostProcessor(in post: String) -> String {
+        let processedPost = post.replacingOccurrences(of: "## ", with: "\n## ").replacingOccurrences(of: "![]", with: "\n![]")
+//        print(processedPost)
+        return processedPost
+    }
+    
     func getPostContent(token: String, id: String, completion: @escaping (_ result: ResponseStatus) -> Void) {
         
         let parameters: [String: String] = [
@@ -33,7 +40,7 @@ class PostController: ObservableObject {
             case .success(let value):
                 let json = JSON(value)
                 if json["message"].string! == "success" {
-                    self.postContent = json["data"].string!
+                    self.postContent = self.postPostProcessor(in: json["data"].string!)
                     print(self.postContent!)
                     completion(.success)
                 }

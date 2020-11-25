@@ -10,12 +10,8 @@ import SwiftUI
 import WebKit
 import JavaScriptCore
 
-
 let jsContext: JSContext = JSContext()
 let cssPath = Bundle.main.path(forResource: "markdown", ofType: "css")
-
-let cssContentData = FileManager.default.contents(atPath: cssPath!)
-let cssContent = NSString(data: cssContentData!, encoding: String.Encoding.utf8.rawValue) as String?
 
 struct MarkdownDisplayer: View {
     
@@ -25,7 +21,12 @@ struct MarkdownDisplayer: View {
             print("Set")
         }
     }
-    @State var htmlString = ""
+    
+    @State var htmlString: String = "" {
+        didSet{
+            print(self.htmlString)
+        }
+    }
     @State var viewHeight: CGFloat = 500
     @State var isLoading = true
 
@@ -45,12 +46,22 @@ struct MarkdownDisplayer: View {
         //调用JS方法
         let mthJS = jsContext.evaluateScript("convert")
         let result = mthJS?.call(withArguments: [markString])
-        return "<html>\n<head>\n<title></title>\n<style>\n" + cssContent! + "</style>\n</head>\n                <body>\n" + result!.toString() + "</body>\n</html>\n"
+        return """
+            <html>
+            <head>
+            <link rel="stylesheet" href="markdown.css">
+            </head>
+            <body>
+            \(result!.toString()!)
+            </body
+            </html>
+
+            """
     }
     
     var body: some View {
         VStack {
-            HtmlView(htmlString: $htmlString).opacity(isLoading ? 0 : 1).transition(.opacity).animation(.easeInOut(duration: 0.25))
+            HtmlView(htmlString: $htmlString, urlString: URL(fileURLWithPath:cssPath!)).opacity(isLoading ? 0 : 1).transition(.opacity).animation(.easeInOut(duration: 0.25))
                 
         }.onAppear(){
             self.htmlString = markdownToHTML(markString: content)

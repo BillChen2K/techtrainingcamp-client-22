@@ -35,18 +35,17 @@ struct PostView: View {
                 Text(post.title!).font(.title).fontWeight(.bold)
                     .offset(x: animationHandle ? 50 : 0, y: 0)
                     .opacity(animationHandle ? 0 : 1)
-                    .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.25))
+                    .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.6).delay(0.25))
                 HStack {
                     Text(post.author!).font(.caption).foregroundColor(.gray)
                         .offset(x: animationHandle ? 50 : 0, y: 0)
                         .opacity(animationHandle ? 0 : 1)
-                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.3))
+                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.6).delay(0.3))
                     Text(post.publishTime!).font(.caption).foregroundColor(.secondary)
                         .offset(x: animationHandle ? 50 : 0, y: 0)
                         .opacity(animationHandle ? 0 : 1)
-                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.8).delay(0.35))
+                        .animation(Animation.timingCurve(0, 0.6, 0.4, 1, duration: 0.6).delay(0.35))
                 }.padding(.top, 6)
-                
             }.padding(.horizontal).padding(.top)
             ZStack {
                 if isLoading {
@@ -96,9 +95,9 @@ struct PostView: View {
             }
             else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.isLogInPushed = true
+//                    self.presentationMode.wrappedValue.dismiss()
                 }
-                self.isLogInPushed = true
             }
         }
         .navigationTitle("")
