@@ -63,11 +63,11 @@ struct MarkdownDisplayer: View {
     
     var body: some View {
         VStack {
-            HtmlView(htmlString: $htmlString, urlString: URL(fileURLWithPath:cssPath!)).opacity(isLoading ? 0 : 1).transition(.opacity).animation(.easeInOut(duration: 0.25))
+            HtmlView(htmlString: $htmlString, urlString: URL(fileURLWithPath:cssPath!)).opacity(isLoading ? 0 : 1).transition(.opacity).animation(.easeInOut(duration: 0.2))
                 
         }.onAppear(){
             self.htmlString = markdownToHTML(markString: content)
-            DispatchQueue.main.asyncAfter(deadline: .now() +  0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() +  0.3) {
                 self.isLoading = false
             }
         }
